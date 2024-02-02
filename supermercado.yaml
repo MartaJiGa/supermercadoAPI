@@ -45,6 +45,41 @@ paths:
                 items:
                   $ref: '#/components/schemas/InternalServerError'
     post:
+      tags:
+        - products
+      summary: Añade un nuevo producto.
+      description: |
+        Esta operación permite añadir un producto en el supermercado.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInDTO'
+      responses:
+        '201':
+          description: El producto ha sido registrado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '400':
+          description: Bad Request (Error de validcación en los datos de entrada)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
   /product/{productId}:
     get:
     put:
@@ -74,6 +109,41 @@ paths:
                 items:
                   $ref: '#/components/schemas/InternalServerError'
     post:
+      tags:
+        - purchases
+      summary: Añade una nueva compra.
+      description: |
+        Esta operación permite añadir una compra.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseInDTO'
+      responses:
+        '201':
+          description: La compra ha sido registrada correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '400':
+          description: Bad Request (Error de validcación en los datos de entrada)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
   /purchase/{purchaseId}:
     get:
     put:
@@ -108,6 +178,41 @@ paths:
                 items:
                   $ref: '#/components/schemas/InternalServerError'
     post:
+      tags:
+        - users
+      summary: Añade un nuevo usuario.
+      description: |
+        Esta operación permite añadir a un usuario.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInDTO'
+      responses:
+        '201':
+          description: El usuario ha sido registrado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '400':
+          description: Bad Request (Error de validcación en los datos de entrada)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
   /user/{userId}:
     get:
     put:
