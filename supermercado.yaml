@@ -1,15 +1,192 @@
 openapi: 3.0.1
 info:
-  title: Sample API
-  description: API description in Markdown.
+  title: supermercadoAPI
+  description: API para la gestión de un supermercado.
   version: 1.0.0
 servers:
-  - url: 'https://api.example.com'
+  - url: 'https://api.supermercado.com'
+
+tags:
+  - name: products
+    description: Operaciones a realizar sobre productos.
+  - name: purchases
+    description: Operaciones a realizar con compras.
+  - name: users
+    description: Operaciones para gestionar a los usuarios.
+
 paths:
+  /products:
+    get:
+    post:
+  /product/{productId}:
+    get:
+    put:
+    delete:
+  /purchases:
+    get:
+    post:
+  /purchase/{purchaseId}:
+    get:
+    put:
+    delete:
   /users:
     get:
-      summary: Returns a list of users.
-      description: Optional extended description in Markdown.
-      responses:
-        '200':
-          description: OK
+    post:
+  /user/{userId}:
+    get:
+    put:
+    delete:
+  /user/{userId}/purchases:
+    get:
+    put:
+    delete:
+  /user/{userId}/purchase/{purchaseId}:
+    get:
+    put:
+    delete:
+
+components:
+  schemas:
+    ProductInDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Mayonesa
+          description: Nombre del producto.
+        price:
+          type: number
+          format: float
+          example: 2.27
+          description: Precio del producto.
+        expirationDate:
+          type: number
+          format: float
+          example: 3.27
+          description: Fecha de caducidad del producto.
+        description:
+          type: string
+          example: Bote de mayonesa ligera
+          description: Descripción del producto.
+    ProductOutDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 3
+          description: Identificador del producto.
+    PurchaseInDTO:
+      type: object
+      properties:
+        delayedPayment:
+          type: boolean
+          example: true
+          description: Si el pago de la compra es aplazado o no.
+        notes:
+          type: string
+          example: Entregar solo por las tardes.
+          description: Anotaciones para la compra.
+    PurchaseOutDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 5
+          description: Identificador de la compra.
+        purchaseDate:
+          type: string
+          format: date
+          example: 2024-02-02
+          description: Fecha de compra.
+    UserInDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Rocío
+          description: Nombre del usuario.
+        surname:
+          type: string
+          example: López
+          description: Apellidos del usuario.
+        dateOfBirth:
+          type: string
+          format: date
+          example: 1998-08-01
+          description: Fecha de nacimiento del usuario.
+        email:
+          type: string
+          example: comprador@gmail.com
+          description: Email del usuario.
+    UserOutDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 3
+          description: Identificador del usuario.
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: number
+          format: int32
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: string
+    BadRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 400
+        message: Validation Error
+    ResourceNotFound:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 404
+        message: Product Not Found
+    InternalServerError:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 500
+        message: Internal Server Error
+
+  parameters:
+    ProductId:
+      name: ProductId
+      in: path
+      description: ID del producto.
+      example: 23
+      required: true
+      schema:
+        type: number
+        format: int64
+    PurchaseId:
+      name: PurchaseId
+      in: path
+      description: ID de la compra.
+      example: 12
+      required: true
+      schema:
+        type: number
+        format: int64
+    UserId:
+      name: UserId
+      in: path
+      description: ID del usuario.
+      example: 34
+      required: true
+      schema:
+        type: number
+        format: int64
