@@ -22,6 +22,8 @@ paths:
       summary: Listar los productos.
       description: |
         Esta operación permite consultar los productos del supermercado.
+        - Escribir el nombre del producto.
+        - Poner el precio del producto.
       parameters:
         - $ref: '#/components/parameters/ProductName'
         - $ref: '#/components/parameters/Price'
@@ -83,6 +85,8 @@ paths:
       summary: Listar los usuarios.
       description: |
         Esta operación permite consultar los usuarios.
+        - Poner el nombre del usuario.
+        - Escribir el apellido del usuario.
       parameters:
         - $ref: '#/components/parameters/UserName'
         - $ref: '#/components/parameters/Surname'
