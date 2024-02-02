@@ -33,6 +33,9 @@ public class ProductService {
     //endregion
 
     //region POST requests
+    public void saveProduct(Product product){
+        productRepository.save(product);
+    }
     //endregion
 
     //region PUT requests

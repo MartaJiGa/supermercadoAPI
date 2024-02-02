@@ -24,6 +24,9 @@ public class PurchaseService {
     //endregion
 
     //region POST requests
+    public void savePurchase(Purchase purchase){
+        purchaseRepository.save(purchase);
+    }
     //endregion
 
     //region PUT requests

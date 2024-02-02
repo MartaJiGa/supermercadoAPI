@@ -33,6 +33,9 @@ public class UserService {
     //endregion
 
     //region POST requests
+    public void saveUser(User user){
+        userRepository.save(user);
+    }
     //endregion
 
     //region PUT requests
