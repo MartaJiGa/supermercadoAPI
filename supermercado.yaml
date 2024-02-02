@@ -82,7 +82,72 @@ paths:
                   $ref: '#/components/schemas/InternalServerError'
   /product/{productId}:
     get:
+      tags:
+        - products
+      summary: Obtiene los datos de un producto.
+      description: |
+        Esta operación permite consultar los datos de un producto.
+      responses:
+        '200':
+          description: El producto ha sido encontrado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '404':
+          description: No se ha podido encontrar el producto.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
     put:
+      tags:
+        - products
+      summary: Modifica un producto.
+      description: |
+        Esta operación permite modificar un producto del supermercado.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInDTO'
+      responses:
+        '200':
+          description: El producto ha sido modificado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '404':
+          description: No se ha podido encontrar el producto.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
     delete:
   /purchases:
     get:
@@ -146,7 +211,72 @@ paths:
                   $ref: '#/components/schemas/InternalServerError'
   /purchase/{purchaseId}:
     get:
+      tags:
+        - purchases
+      summary: Obtiene los datos de una compra.
+      description: |
+        Esta operación permite consultar los datos de una compra.
+      responses:
+        '200':
+          description: La compra ha sido encontrada correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '404':
+          description: No se ha podido encontrar la compra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
     put:
+      tags:
+        - purchases
+      summary: Modifica una compra.
+      description: |
+        Esta operación permite modificar una compra.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseInDTO'
+      responses:
+        '200':
+          description: La compra ha sido modificada correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '404':
+          description: No se ha podido encontrar la compra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
     delete:
   /users:
     get:
@@ -215,7 +345,72 @@ paths:
                   $ref: '#/components/schemas/InternalServerError'
   /user/{userId}:
     get:
+      tags:
+        - users
+      summary: Obtiene los datos de un usuario.
+      description: |
+        Esta operación permite consultar los datos de un usuario
+      responses:
+        '200':
+          description: El usuario ha sido encontrado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '404':
+          description: No se ha podido encontrar el usuario.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
     put:
+      tags:
+        - users
+      summary: Modifica un usuario.
+      description: |
+        Esta operación permite modificar un usuario.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInDTO'
+      responses:
+        '200':
+          description: El usuario ha sido modificado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '404':
+          description: No se ha podido encontrar el usuario.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
     delete:
   /user/{userId}/purchases:
     get:
