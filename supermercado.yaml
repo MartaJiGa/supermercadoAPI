@@ -17,6 +17,31 @@ tags:
 paths:
   /products:
     get:
+      tags:
+        - products
+      summary: Listar los productos.
+      description: |
+        Esta operación permite consultar los productos del supermercado.
+      parameters:
+        - $ref: '#/components/parameters/ProductName'
+        - $ref: '#/components/parameters/Price'
+      responses:
+        '200':
+          description: Devuelve la lista completa de productos del supermercado.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
     post:
   /product/{productId}:
     get:
@@ -24,6 +49,28 @@ paths:
     delete:
   /purchases:
     get:
+      tags:
+        - purchases
+      summary: Listar las compras.
+      description: |
+        Esta operación permite consultar las compras del supermercado.
+      responses:
+        '200':
+          description: Devuelve la lista completa de compras.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
     post:
   /purchase/{purchaseId}:
     get:
@@ -31,6 +78,31 @@ paths:
     delete:
   /users:
     get:
+      tags:
+        - users
+      summary: Listar los usuarios.
+      description: |
+        Esta operación permite consultar los usuarios.
+      parameters:
+        - $ref: '#/components/parameters/UserName'
+        - $ref: '#/components/parameters/Surname'
+      responses:
+        '200':
+          description: Devuelve la lista completa de productos del supermercado.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
     post:
   /user/{userId}:
     get:
@@ -110,7 +182,7 @@ components:
         surname:
           type: string
           example: López
-          description: Apellidos del usuario.
+          description: Apellido del usuario.
         dateOfBirth:
           type: string
           format: date
@@ -190,3 +262,35 @@ components:
       schema:
         type: number
         format: int64
+    ProductName:
+      name: Nombre
+      in: query
+      description: Escribir el nombre del producto
+      example: Pechugas de pollo
+      required: false
+      schema:
+        type: string
+    Price:
+      name: Precio
+      in: query
+      description: Escribir el precio del producto
+      example: 6.25
+      required: false
+      schema:
+        type: float
+    UserName:
+      name: Nombre
+      in: query
+      description: Escribir el nombre del usuario
+      example: Marcos
+      required: false
+      schema:
+        type: string
+    Surname:
+      name: Apellido
+      in: query
+      description: Escribir el apellido del usuario
+      example: Palacio
+      required: false
+      schema:
+        type: string
