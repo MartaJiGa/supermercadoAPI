@@ -1,0 +1,699 @@
+openapi: 3.0.1
+info:
+  title: supermercadoAPI
+  description: API para la gestión de un supermercado.
+  version: 1.0.0
+servers:
+  - url: 'https://api.supermercado.com'
+
+tags:
+  - name: products
+    description: Operaciones a realizar sobre productos.
+  - name: purchases
+    description: Operaciones a realizar con compras.
+  - name: users
+    description: Operaciones para gestionar a los usuarios.
+
+paths:
+  /products:
+    get:
+      tags:
+        - products
+      summary: Listar los productos.
+      description: |
+        Esta operación permite consultar los productos del supermercado.
+        - Escribir el nombre del producto.
+        - Poner el precio del producto.
+      parameters:
+        - $ref: '#/components/parameters/ProductName'
+        - $ref: '#/components/parameters/Price'
+      responses:
+        '200':
+          description: Devuelve la lista completa de productos del supermercado.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    post:
+      tags:
+        - products
+      summary: Añade un nuevo producto.
+      description: |
+        Esta operación permite añadir un producto en el supermercado.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInDTO'
+      responses:
+        '201':
+          description: El producto ha sido registrado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '400':
+          description: Bad Request (Error de validcación en los datos de entrada)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+  /product/{productId}:
+    parameters:
+      - $ref: '#/components/parameters/ProductId'
+    get:
+      tags:
+        - products
+      summary: Obtiene los datos de un producto.
+      description: |
+        Esta operación permite consultar los datos de un producto.
+      responses:
+        '200':
+          description: El producto ha sido encontrado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '404':
+          description: No se ha podido encontrar el producto.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    put:
+      tags:
+        - products
+      summary: Modifica un producto.
+      description: |
+        Esta operación permite modificar un producto del supermercado.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInDTO'
+      responses:
+        '200':
+          description: El producto ha sido modificado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '404':
+          description: No se ha podido encontrar el producto.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    delete:
+      tags:
+        - products
+      summary: Elimina un producto.
+      description: |
+        Esta operación permite eliminar un producto del supermercado.
+      responses:
+        '200':
+          description: El producto ha sido eliminado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '404':
+          description: No se ha podido encontrar el producto.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+  /users:
+    get:
+      tags:
+        - users
+      summary: Listar los usuarios.
+      description: |
+        Esta operación permite consultar los usuarios.
+        - Poner el nombre del usuario.
+        - Escribir el apellido del usuario.
+      parameters:
+        - $ref: '#/components/parameters/UserName'
+        - $ref: '#/components/parameters/Surname'
+      responses:
+        '200':
+          description: Devuelve la lista completa de productos del supermercado.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    post:
+      tags:
+        - users
+      summary: Añade un nuevo usuario.
+      description: |
+        Esta operación permite añadir a un usuario.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInDTO'
+      responses:
+        '201':
+          description: El usuario ha sido registrado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '400':
+          description: Bad Request (Error de validcación en los datos de entrada)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+  /user/{userId}:
+    parameters:
+      - $ref: '#/components/parameters/UserId'
+    get:
+      tags:
+        - users
+      summary: Obtiene los datos de un usuario.
+      description: |
+        Esta operación permite consultar los datos de un usuario
+      responses:
+        '200':
+          description: El usuario ha sido encontrado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '404':
+          description: No se ha podido encontrar el usuario.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    put:
+      tags:
+        - users
+      summary: Modifica un usuario.
+      description: |
+        Esta operación permite modificar un usuario.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInDTO'
+      responses:
+        '200':
+          description: El usuario ha sido modificado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '404':
+          description: No se ha podido encontrar el usuario.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    delete:
+      tags:
+        - users
+      summary: Elimina un usuario.
+      description: |
+        Esta operación permite eliminar un usuario.
+      responses:
+        '200':
+          description: El usuario ha sido eliminado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '404':
+          description: No se ha podido encontrar el usuario.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+  /user/{userId}/purchases:
+    parameters:
+      - $ref: '#/components/parameters/UserId'
+    get:
+      tags:
+        - purchases
+      summary: Obtiene las compras de un usuario.
+      description: |
+        Esta operación permite consultar las compras que ha hecho un usuario.
+      responses:
+        '200':
+          description: La compra ha sido encontrada correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '404':
+          description: No se ha podido encontrar la compra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    post:
+      tags:
+        - purchases
+      summary: Añade una nueva compra.
+      description: |
+        Esta operación permite añadir una compra.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseInDTO'
+      responses:
+        '201':
+          description: La compra ha sido registrada correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '400':
+          description: Bad Request (Error de validcación en los datos de entrada)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+  /user/{userId}/purchase/{purchaseId}:
+    parameters:
+      - $ref: '#/components/parameters/UserId'
+      - $ref: '#/components/parameters/PurchaseId'
+    get:
+      tags:
+        - purchases
+      summary: Obtiene los datos de una compra.
+      description: |
+        Esta operación permite consultar los datos de una compra.
+      responses:
+        '200':
+          description: La compra ha sido encontrada correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '404':
+          description: No se ha podido encontrar la compra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    put:
+      tags:
+        - purchases
+      summary: Modifica una compra.
+      description: |
+        Esta operación permite modificar una compra.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseInDTO'
+      responses:
+        '200':
+          description: La compra ha sido modificada correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '404':
+          description: No se ha podido encontrar la compra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    delete:
+      tags:
+        - purchases
+      summary: Elimina una compra.
+      description: |
+        Esta operación permite eliminar una compra.
+      responses:
+        '200':
+          description: La compra ha sido eliminado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '404':
+          description: No se ha podido encontrar la compra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+
+components:
+  schemas:
+    ProductInDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Mayonesa
+          description: Nombre del producto.
+        price:
+          type: number
+          format: float
+          example: 2.27
+          description: Precio del producto.
+        expirationDate:
+          type: number
+          format: float
+          example: 3.27
+          description: Fecha de caducidad del producto.
+        description:
+          type: string
+          example: Bote de mayonesa ligera
+          description: Descripción del producto.
+    ProductOutDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 3
+          description: Identificador del producto.
+    PurchaseInDTO:
+      type: object
+      properties:
+        delayedPayment:
+          type: boolean
+          example: true
+          description: Si el pago de la compra es aplazado o no.
+        notes:
+          type: string
+          example: Entregar solo por las tardes.
+          description: Anotaciones para la compra.
+    PurchaseOutDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 5
+          description: Identificador de la compra.
+        purchaseDate:
+          type: string
+          format: date
+          example: 2024-02-02
+          description: Fecha de compra.
+    UserInDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Rocío
+          description: Nombre del usuario.
+        surname:
+          type: string
+          example: López
+          description: Apellido del usuario.
+        dateOfBirth:
+          type: string
+          format: date
+          example: 1998-08-01
+          description: Fecha de nacimiento del usuario.
+        email:
+          type: string
+          example: comprador@gmail.com
+          description: Email del usuario.
+    UserOutDTO:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 3
+          description: Identificador del usuario.
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: number
+          format: int32
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: string
+    BadRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 400
+        message: Validation Error
+    ResourceNotFound:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 404
+        message: Product Not Found
+    InternalServerError:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 500
+        message: Internal Server Error
+
+  parameters:
+    ProductId:
+      name: ProductId
+      in: path
+      description: ID del producto.
+      example: 23
+      required: true
+      schema:
+        type: number
+        format: int64
+    PurchaseId:
+      name: PurchaseId
+      in: path
+      description: ID de la compra.
+      example: 12
+      required: true
+      schema:
+        type: number
+        format: int64
+    UserId:
+      name: UserId
+      in: path
+      description: ID del usuario.
+      example: 34
+      required: true
+      schema:
+        type: number
+        format: int64
+    ProductName:
+      name: Nombre
+      in: query
+      description: Escribir el nombre del producto
+      example: Pechugas de pollo
+      required: false
+      schema:
+        type: string
+    Price:
+      name: Precio
+      in: query
+      description: Escribir el precio del producto
+      example: 6.25
+      required: false
+      schema:
+        type: float
+    UserName:
+      name: Nombre
+      in: query
+      description: Escribir el nombre del usuario
+      example: Marcos
+      required: false
+      schema:
+        type: string
+    Surname:
+      name: Apellido
+      in: query
+      description: Escribir el apellido del usuario
+      example: Palacio
+      required: false
+      schema:
+        type: string
