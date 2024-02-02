@@ -25,4 +25,8 @@ public class Purchase {
 
     @Column
     private String notes;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

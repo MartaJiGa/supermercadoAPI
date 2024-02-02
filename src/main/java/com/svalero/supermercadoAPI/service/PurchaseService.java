@@ -21,6 +21,12 @@ public class PurchaseService {
     public Optional<Purchase> getPurchaseById(Long id){
         return purchaseRepository.findById(id);
     }
+    public List<Purchase> getPurchasesByUser(long id){
+        return purchaseRepository.findByUser(id);
+    }
+    public Optional<Purchase> getPurchaseByUser(long userId, long purchaseId){
+        return purchaseRepository.findByUserAndPurchase(userId, purchaseId);
+    }
     //endregion
 
     //region POST requests
