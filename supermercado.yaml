@@ -54,7 +54,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProductInDTO'
+              $ref: '#/components/schemas/UserOutDTO'
       responses:
         '201':
           description: El producto ha sido registrado correctamente.
@@ -81,6 +81,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/InternalServerError'
   /product/{productId}:
+    parameters:
+      - $ref: '#/components/parameters/ProductId'
     get:
       tags:
         - products
@@ -240,6 +242,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/InternalServerError'
   /purchase/{purchaseId}:
+    parameters:
+      - $ref: '#/components/parameters/PurchaseId'
     get:
       tags:
         - purchases
@@ -404,6 +408,8 @@ paths:
                 items:
                   $ref: '#/components/schemas/InternalServerError'
   /user/{userId}:
+    parameters:
+      - $ref: '#/components/parameters/UserId'
     get:
       tags:
         - users
