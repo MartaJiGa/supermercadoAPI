@@ -42,5 +42,8 @@ public class ProductService {
     //endregion
 
     //region DELETE requests
+    public void removeProduct(long productId){
+        productRepository.deleteById(productId);
+    }
     //endregion
 }

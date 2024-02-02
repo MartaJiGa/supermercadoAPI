@@ -42,5 +42,8 @@ public class UserService {
     //endregion
 
     //region DELETE requests
+    public void removeUser(long userId){
+        userRepository.deleteById(userId);
+    }
     //endregion
 }

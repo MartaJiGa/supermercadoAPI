@@ -33,5 +33,8 @@ public class PurchaseService {
     //endregion
 
     //region DELETE requests
+    public void removePurchase(long purchaseId){
+        purchaseRepository.deleteById(purchaseId);
+    }
     //endregion
 }
