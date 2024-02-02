@@ -3,10 +3,7 @@ package com.svalero.supermercadoAPI.controller;
 import com.svalero.supermercadoAPI.domain.Product;
 import com.svalero.supermercadoAPI.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +35,10 @@ public class ProductController {
     //endregion
 
     //region POST requests
+    @PostMapping("/products")
+    public void saveProduct(@RequestBody Product product){
+        productService.saveProduct(product);
+    }
     //endregion
 
     //region PUT requests
