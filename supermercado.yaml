@@ -54,7 +54,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserOutDTO'
+              $ref: '#/components/schemas/ProductInDTO'
       responses:
         '201':
           description: El producto ha sido registrado correctamente.
@@ -167,167 +167,6 @@ paths:
                   $ref: '#/components/schemas/ProductOutDTO'
         '404':
           description: No se ha podido encontrar el producto.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ResourceNotFound'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/InternalServerError'
-  /purchases:
-    get:
-      tags:
-        - purchases
-      summary: Listar las compras.
-      description: |
-        Esta operación permite consultar las compras del supermercado.
-      responses:
-        '200':
-          description: Devuelve la lista completa de compras.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ProductOutDTO'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/InternalServerError'
-    post:
-      tags:
-        - purchases
-      summary: Añade una nueva compra.
-      description: |
-        Esta operación permite añadir una compra.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PurchaseInDTO'
-      responses:
-        '201':
-          description: La compra ha sido registrada correctamente.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PurchaseOutDTO'
-        '400':
-          description: Bad Request (Error de validcación en los datos de entrada)
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/BadRequest'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/InternalServerError'
-  /purchase/{purchaseId}:
-    parameters:
-      - $ref: '#/components/parameters/PurchaseId'
-    get:
-      tags:
-        - purchases
-      summary: Obtiene los datos de una compra.
-      description: |
-        Esta operación permite consultar los datos de una compra.
-      responses:
-        '200':
-          description: La compra ha sido encontrada correctamente.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PurchaseOutDTO'
-        '404':
-          description: No se ha podido encontrar la compra.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ResourceNotFound'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/InternalServerError'
-    put:
-      tags:
-        - purchases
-      summary: Modifica una compra.
-      description: |
-        Esta operación permite modificar una compra.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PurchaseInDTO'
-      responses:
-        '200':
-          description: La compra ha sido modificada correctamente.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PurchaseOutDTO'
-        '404':
-          description: No se ha podido encontrar la compra.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ResourceNotFound'
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/InternalServerError'
-    delete:
-      tags:
-        - purchases
-      summary: Elimina una compra.
-      description: |
-        Esta operación permite eliminar una compra.
-      responses:
-        '200':
-          description: La compra ha sido eliminado correctamente.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PurchaseOutDTO'
-        '404':
-          description: No se ha podido encontrar la compra.
           content:
             application/json:
               schema:
@@ -509,13 +348,177 @@ paths:
                 items:
                   $ref: '#/components/schemas/InternalServerError'
   /user/{userId}/purchases:
+    parameters:
+      - $ref: '#/components/parameters/UserId'
     get:
-    put:
-    delete:
+      tags:
+        - purchases
+      summary: Obtiene las compras de un usuario.
+      description: |
+        Esta operación permite consultar las compras que ha hecho un usuario.
+      responses:
+        '200':
+          description: La compra ha sido encontrada correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '404':
+          description: No se ha podido encontrar la compra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
+    post:
+      tags:
+        - purchases
+      summary: Añade una nueva compra.
+      description: |
+        Esta operación permite añadir una compra.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseInDTO'
+      responses:
+        '201':
+          description: La compra ha sido registrada correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '400':
+          description: Bad Request (Error de validcación en los datos de entrada)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
   /user/{userId}/purchase/{purchaseId}:
+    parameters:
+      - $ref: '#/components/parameters/UserId'
+      - $ref: '#/components/parameters/PurchaseId'
     get:
+      tags:
+        - purchases
+      summary: Obtiene los datos de una compra.
+      description: |
+        Esta operación permite consultar los datos de una compra.
+      responses:
+        '200':
+          description: La compra ha sido encontrada correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '404':
+          description: No se ha podido encontrar la compra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
     put:
+      tags:
+        - purchases
+      summary: Modifica una compra.
+      description: |
+        Esta operación permite modificar una compra.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseInDTO'
+      responses:
+        '200':
+          description: La compra ha sido modificada correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '404':
+          description: No se ha podido encontrar la compra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
     delete:
+      tags:
+        - purchases
+      summary: Elimina una compra.
+      description: |
+        Esta operación permite eliminar una compra.
+      responses:
+        '200':
+          description: La compra ha sido eliminado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '404':
+          description: No se ha podido encontrar la compra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
 
 components:
   schemas:
