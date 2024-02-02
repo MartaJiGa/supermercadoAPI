@@ -45,5 +45,9 @@ public class ProductController {
     //endregion
 
     //region DELETE requests
+    @DeleteMapping("/product/{productId}")
+    public void removeProduct(@PathVariable long productId){
+        productService.removeProduct(productId);
+    }
     //endregion
 }

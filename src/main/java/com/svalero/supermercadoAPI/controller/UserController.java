@@ -45,5 +45,9 @@ public class UserController {
     //endregion
 
     //region DELETE requests
+    @DeleteMapping("/user/{userId}")
+    public void removeUser(@PathVariable long userId){
+        userService.removeUser(userId);
+    }
     //endregion
 }
