@@ -1,7 +1,48 @@
 package com.svalero.supermercadoAPI.controller;
 
-import org.springframework.stereotype.Controller;
+import com.svalero.supermercadoAPI.domain.Product;
+import com.svalero.supermercadoAPI.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+
+@RestController
 public class ProductController {
+
+    @Autowired
+    private ProductService productService;
+
+    //region GET requests
+    @GetMapping("/product/{productId}")
+    public Optional<Product> getProduct(@PathVariable long productId){
+        return productService.getProductById(productId);
+    }
+    @GetMapping("/products")
+    public List<Product> findAll(@RequestParam(defaultValue = "")String productName, @RequestParam(defaultValue = "0")float price){
+        if(!productName.isEmpty() && price == 0){
+            return productService.getProductByName(productName);
+        }
+        else if(productName.isEmpty() && price != 0){
+            return productService.getProductByPrice(price);
+        }
+        else if(!productName.isEmpty() && price != 0){
+            return productService.getProductByNameAndPrice(productName, price);
+        }
+        return productService.getProducts();
+    }
+    //endregion
+
+    //region POST requests
+    //endregion
+
+    //region PUT requests
+    //endregion
+
+    //region DELETE requests
+    //endregion
 }

@@ -24,10 +24,10 @@ public class UserService {
     public List<User> getUserByName(String name){
         return userRepository.findByName(name);
     }
-    public List<User> getUserByPrice(String surname){
+    public List<User> getUserBySurname(String surname){
         return userRepository.findBySurname(surname);
     }
-    public List<User> getUserByNameAndPrice(String name, String surname){
+    public List<User> getUserByNameAndSurname(String name, String surname){
         return userRepository.findByNameAndSurname(name,surname);
     }
     //endregion
