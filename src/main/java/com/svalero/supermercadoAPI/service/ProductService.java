@@ -39,6 +39,19 @@ public class ProductService {
     //endregion
 
     //region PUT requests
+    public void modifyProduct(Product newProduct, long productId){
+        Optional<Product> product = productRepository.findById(productId);
+
+        if(product.isPresent()){
+            Product existingProduct = product.get();
+
+            existingProduct.setName(newProduct.getName());
+            existingProduct.setPrice(newProduct.getPrice());
+            existingProduct.setDescription(newProduct.getDescription());
+
+            productRepository.save(existingProduct);
+        }
+    }
     //endregion
 
     //region DELETE requests

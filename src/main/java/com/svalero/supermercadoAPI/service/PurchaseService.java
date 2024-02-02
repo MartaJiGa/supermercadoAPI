@@ -30,6 +30,16 @@ public class PurchaseService {
     //endregion
 
     //region PUT requests
+    public void modifyPurchase(Purchase newPurchase, long purchaseId){
+        Optional<Purchase> purchase = purchaseRepository.findById(purchaseId);
+
+        if(purchase.isPresent()){
+            Purchase existingPurchase = purchase.get();
+
+            existingPurchase.setDelayedPayment(newPurchase.isDelayedPayment());
+            existingPurchase.setNotes(newPurchase.getNotes());
+        }
+    }
     //endregion
 
     //region DELETE requests

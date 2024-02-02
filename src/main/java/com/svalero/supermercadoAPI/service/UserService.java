@@ -39,6 +39,18 @@ public class UserService {
     //endregion
 
     //region PUT requests
+    public void modifyUser(User newUser, long userId){
+        Optional<User> user = userRepository.findById(userId);
+
+        if(user.isPresent()){
+            User existingUser = user.get();
+
+            existingUser.setName(newUser.getName());
+            existingUser.setSurname(newUser.getSurname());
+            existingUser.setDateOfBirth(newUser.getDateOfBirth());
+            existingUser.setEmail(newUser.getEmail());
+        }
+    }
     //endregion
 
     //region DELETE requests
