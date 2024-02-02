@@ -42,6 +42,10 @@ public class ProductController {
     //endregion
 
     //region PUT requests
+    @PutMapping("/product/{productId}")
+    public void modifyProduct(@RequestBody Product product, @PathVariable long productId){
+        productService.modifyProduct(product, productId);
+    }
     //endregion
 
     //region DELETE requests

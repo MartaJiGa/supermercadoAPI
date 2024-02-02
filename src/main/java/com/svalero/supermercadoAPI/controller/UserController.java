@@ -42,6 +42,10 @@ public class UserController {
     //endregion
 
     //region PUT requests
+    @PutMapping("/user/{userId}")
+    public void modifyUser(@RequestBody User user, @PathVariable long userId){
+        userService.modifyUser(user, userId);
+    }
     //endregion
 
     //region DELETE requests
