@@ -149,6 +149,36 @@ paths:
                 items:
                   $ref: '#/components/schemas/InternalServerError'
     delete:
+      tags:
+        - products
+      summary: Elimina un producto.
+      description: |
+        Esta operación permite eliminar un producto del supermercado.
+      responses:
+        '200':
+          description: El producto ha sido eliminado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductOutDTO'
+        '404':
+          description: No se ha podido encontrar el producto.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
   /purchases:
     get:
       tags:
@@ -278,6 +308,36 @@ paths:
                 items:
                   $ref: '#/components/schemas/InternalServerError'
     delete:
+      tags:
+        - purchases
+      summary: Elimina una compra.
+      description: |
+        Esta operación permite eliminar una compra.
+      responses:
+        '200':
+          description: La compra ha sido eliminado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOutDTO'
+        '404':
+          description: No se ha podido encontrar la compra.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
   /users:
     get:
       tags:
@@ -412,6 +472,36 @@ paths:
                 items:
                   $ref: '#/components/schemas/InternalServerError'
     delete:
+      tags:
+        - users
+      summary: Elimina un usuario.
+      description: |
+        Esta operación permite eliminar un usuario.
+      responses:
+        '200':
+          description: El usuario ha sido eliminado correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserOutDTO'
+        '404':
+          description: No se ha podido encontrar el usuario.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceNotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InternalServerError'
   /user/{userId}/purchases:
     get:
     put:
