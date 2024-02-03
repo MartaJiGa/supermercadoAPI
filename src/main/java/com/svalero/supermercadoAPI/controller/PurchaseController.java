@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class PurchaseController {
@@ -22,6 +21,10 @@ public class PurchaseController {
     private PurchaseService purchaseService;
 
     //region GET requests
+    @GetMapping("/purchases")
+    public List<Purchase> getPurchases() {
+        return purchaseService.getPurchases();
+    }
     @GetMapping("/purchase/{purchaseId}")
     public Purchase getUserPurchaseById(@PathVariable long purchaseId) throws ProductNotFoundException {
         return purchaseService.getPurchaseById(purchaseId);

@@ -8,8 +8,6 @@ import com.svalero.supermercadoAPI.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +27,7 @@ public class PurchaseService {
     public Purchase getPurchaseById(Long id) throws ProductNotFoundException {
         return purchaseRepository.findById(id).orElseThrow(()-> new ProductNotFoundException());
     }
-    public List<Purchase> getPurchasesByUser(long id){
+    public List<Purchase> getPurchasesByUser(long id) {
         return purchaseRepository.findByUser(id);
     }
     //endregion
@@ -56,7 +54,7 @@ public class PurchaseService {
     //endregion
 
     //region DELETE requests
-    public void removePurchase(long purchaseId){
+    public void removePurchase(long purchaseId) {
         purchaseRepository.deleteById(purchaseId);
     }
     //endregion
