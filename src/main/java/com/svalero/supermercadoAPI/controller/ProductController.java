@@ -62,20 +62,20 @@ public class ProductController {
     //endregion
 
     //region EXCEPTION HANDLER
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> badRequestException(MethodArgumentNotValidException badRequestEx){
-        ErrorResponse errorResponse = new ErrorResponse(400, badRequestEx.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorResponse> productNotFoundException(ProductNotFoundException resNotFoundEx){
-        ErrorResponse errorResponse = new ErrorResponse(404, resNotFoundEx.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
-    @ExceptionHandler(HttpServerErrorException.InternalServerError.class)
-    public ResponseEntity<ErrorResponse> internalServerError(HttpServerErrorException.InternalServerError intServError){
-        ErrorResponse errorResponse = new ErrorResponse(500, intServError.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<ErrorResponse> badRequestException(MethodArgumentNotValidException badRequestEx){
+//        ErrorResponse errorResponse = new ErrorResponse(400, badRequestEx.getMessage());
+//        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+//    }
+//    @ExceptionHandler(ProductNotFoundException.class)
+//    public ResponseEntity<ErrorResponse> productNotFoundException(ProductNotFoundException resNotFoundEx){
+//        ErrorResponse errorResponse = new ErrorResponse(404, resNotFoundEx.getMessage());
+//        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+//    }
+//    @ExceptionHandler(HttpServerErrorException.InternalServerError.class)
+//    public ResponseEntity<ErrorResponse> internalServerError(HttpServerErrorException.InternalServerError intServError){
+//        ErrorResponse errorResponse = new ErrorResponse(500, intServError.getMessage());
+//        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
     //endregion
 }

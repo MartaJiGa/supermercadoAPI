@@ -23,7 +23,7 @@ public class PurchaseController {
 
     //region GET requests
     @GetMapping("/purchase/{purchaseId}")
-    public Optional<Purchase> getUserPurchaseById(@PathVariable long purchaseId) throws ProductNotFoundException {
+    public Purchase getUserPurchaseById(@PathVariable long purchaseId) throws ProductNotFoundException {
         return purchaseService.getPurchaseById(purchaseId);
     }
     @GetMapping("/user/{userId}/purchases")

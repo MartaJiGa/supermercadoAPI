@@ -18,7 +18,7 @@ public class ErrorResponse {
         errors = new HashMap<>();
     }
 
-    public static ErrorResponse BadRequestError(Map<String, String> errors){
-        return new ErrorResponse(400, "Bad Request Error", errors);
-    }
+//    public static ErrorResponse BadRequestError(Map<String, String> errors){
+//        return new ErrorResponse(400, "Bad Request Error", errors);
+//    }
 }

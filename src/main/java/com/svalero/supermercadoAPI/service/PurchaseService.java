@@ -26,8 +26,8 @@ public class PurchaseService {
     public List<Purchase> getPurchases(){
         return purchaseRepository.findAll();
     }
-    public Optional<Purchase> getPurchaseById(Long id){
-        return purchaseRepository.findById(id);
+    public Purchase getPurchaseById(Long id) throws ProductNotFoundException {
+        return purchaseRepository.findById(id).orElseThrow(()-> new ProductNotFoundException());
     }
     public List<Purchase> getPurchasesByUser(long id){
         return purchaseRepository.findByUser(id);

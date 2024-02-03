@@ -22,8 +22,8 @@ public class UserController {
 
     //region GET requests
     @GetMapping("/user/{userId}")
-    public Optional<User> getUser(@PathVariable long userId) throws UserNotFoundException {
-        return userService.getUserById(userId);
+    public User getUser(@PathVariable long userId) throws UserNotFoundException {
+        return userService.getUserById(userId).orElseThrow(()-> new UserNotFoundException());
     }
     @GetMapping("/users")
     public List<User> findAll(@RequestParam(defaultValue = "")String userName, @RequestParam(defaultValue = "")String surname) throws UserNotFoundException {
