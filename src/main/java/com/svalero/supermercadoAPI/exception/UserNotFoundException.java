@@ -9,4 +9,8 @@ public class UserNotFoundException extends Exception {
     public UserNotFoundException(String message){
         super(message);
     }
+
+    public UserNotFoundException(long id){
+        super("El usuario " + id + " no existe.");
+    }
 }

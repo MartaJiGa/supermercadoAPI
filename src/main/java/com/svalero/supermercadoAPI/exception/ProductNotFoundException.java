@@ -8,4 +8,8 @@ public class ProductNotFoundException extends Exception {
     public ProductNotFoundException(String message){
         super(message);
     }
+
+    public ProductNotFoundException(long id){
+        super("El recurso " + id + " no ha sido encontrado.");
+    }
 }

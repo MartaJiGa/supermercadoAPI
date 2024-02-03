@@ -1,9 +1,12 @@
 package com.svalero.supermercadoAPI.controller;
 
+import com.svalero.supermercadoAPI.domain.ErrorResponse;
 import com.svalero.supermercadoAPI.domain.Product;
 import com.svalero.supermercadoAPI.exception.ProductNotFoundException;
 import com.svalero.supermercadoAPI.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +40,7 @@ public class ProductController {
 
     //region POST requests
     @PostMapping("/products")
-    public void saveProduct(@RequestBody Product product){
+    public void saveProduct(@RequestBody Product product) {
         productService.saveProduct(product);
     }
     //endregion
@@ -53,6 +56,14 @@ public class ProductController {
     @DeleteMapping("/product/{productId}")
     public void removeProduct(@PathVariable long productId) throws ProductNotFoundException {
         productService.removeProduct(productId);
+    }
+    //endregion
+
+    //region EXCEPTION HANDLER
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ErrorResponse> productNotFoundException(ProductNotFoundException resNotFoundEx){
+        ErrorResponse errorResponse = new ErrorResponse(404, resNotFoundEx.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
     //endregion
 }

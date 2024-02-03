@@ -43,7 +43,7 @@ public class PurchaseService {
     //endregion
 
     //region PUT requests
-    public void modifyPurchase(Purchase newPurchase, long purchaseId, long userId){
+    public void modifyPurchase(Purchase newPurchase, long purchaseId){
         Optional<Purchase> purchase = purchaseRepository.findById(purchaseId);
 
         if(purchase.isPresent()){

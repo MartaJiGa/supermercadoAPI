@@ -1,6 +1,7 @@
 package com.svalero.supermercadoAPI.controller;
 
 import com.svalero.supermercadoAPI.domain.Purchase;
+import com.svalero.supermercadoAPI.exception.ProductNotFoundException;
 import com.svalero.supermercadoAPI.exception.UserNotFoundException;
 import com.svalero.supermercadoAPI.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,11 @@ public class PurchaseController {
 
     //region GET requests
     @GetMapping("/purchase/{purchaseId}")
-    public Optional<Purchase> getUserPurchaseById(@PathVariable long purchaseId){
+    public Optional<Purchase> getUserPurchaseById(@PathVariable long purchaseId) throws ProductNotFoundException {
         return purchaseService.getPurchaseById(purchaseId);
     }
     @GetMapping("/user/{userId}/purchases")
-    public List<Purchase> getUserPurchase(@PathVariable long userId){
+    public List<Purchase> getUserPurchase(@PathVariable long userId) throws UserNotFoundException {
         return purchaseService.getPurchasesByUser(userId);
     }
     //endregion
@@ -35,15 +36,18 @@ public class PurchaseController {
 
     //region PUT requests
     @PutMapping("/purchase/{purchaseId}")
-    public void modifyPurchase(@RequestBody Purchase purchase, @PathVariable long purchaseId, @PathVariable long userId){
-        purchaseService.modifyPurchase(purchase, purchaseId, userId);
+    public void modifyPurchase(@RequestBody Purchase purchase, @PathVariable long purchaseId) throws ProductNotFoundException {
+        purchaseService.modifyPurchase(purchase, purchaseId);
     }
     //endregion
 
     //region DELETE requests
     @DeleteMapping("/purchase/{purchaseId}")
-    public void removePurchase(@PathVariable long purchaseId){
+    public void removePurchase(@PathVariable long purchaseId) throws ProductNotFoundException {
         purchaseService.removePurchase(purchaseId);
     }
+    //endregion
+
+    //region EXCEPTION HANDLER
     //endregion
 }

@@ -1,6 +1,7 @@
 package com.svalero.supermercadoAPI.service;
 
 import com.svalero.supermercadoAPI.domain.User;
+import com.svalero.supermercadoAPI.exception.UserNotFoundException;
 import com.svalero.supermercadoAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,13 @@ public class UserService {
     public List<User> getUsers(){
         return userRepository.findAll();
     }
-    public Optional<User> getUserById(Long id){
+    public Optional<User> getUserById(Long id) throws UserNotFoundException {
         return userRepository.findById(id);
     }
-    public List<User> getUserByName(String name){
+    public List<User> getUserByName(String name) throws UserNotFoundException {
         return userRepository.findByName(name);
     }
-    public List<User> getUserBySurname(String surname){
+    public List<User> getUserBySurname(String surname) throws UserNotFoundException {
         return userRepository.findBySurname(surname);
     }
     public List<User> getUserByNameAndSurname(String name, String surname){

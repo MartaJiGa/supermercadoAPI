@@ -21,7 +21,7 @@ public class UserController {
         return userService.getUserById(userId);
     }
     @GetMapping("/users")
-    public List<User> findAll(@RequestParam(defaultValue = "")String userName, @RequestParam(defaultValue = "")String surname){
+    public List<User> findAll(@RequestParam(defaultValue = "")String userName, @RequestParam(defaultValue = "")String surname) throws UserNotFoundException {
         if(!userName.isEmpty() && surname.isEmpty()){
             return userService.getUserByName(userName);
         }
@@ -54,5 +54,8 @@ public class UserController {
     public void removeUser(@PathVariable long userId) throws UserNotFoundException {
         userService.removeUser(userId);
     }
+    //endregion
+
+    //region EXCEPTION HANDLER
     //endregion
 }
