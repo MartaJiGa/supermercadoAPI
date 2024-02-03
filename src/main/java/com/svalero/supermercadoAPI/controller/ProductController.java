@@ -22,19 +22,19 @@ public class ProductController {
 
     //region GET requests
     @GetMapping("/product/{productId}")
-    public Optional<Product> getProduct(@PathVariable long productId) throws ProductNotFoundException {
+    public Product getProduct(@PathVariable long productId) throws ProductNotFoundException {
         return productService.getProductById(productId);
     }
     @GetMapping("/products")
-    public List<Product> findAll(@RequestParam(defaultValue = "")String productName, @RequestParam(defaultValue = "0") float price){
-        if(!productName.isEmpty() && price == 0){
-            return productService.getProductByName(productName);
+    public List<Product> findAll(@RequestParam(defaultValue = "")String name, @RequestParam(defaultValue = "0") float price){
+        if(!name.isEmpty() && price == 0){
+            return productService.findByName(name);
         }
-        else if(productName.isEmpty() && price != 0){
-            return productService.getProductByPrice(price);
+        else if(name.isEmpty() && price != 0){
+            return productService.findByPrice(price);
         }
-        else if(!productName.isEmpty() && price != 0){
-            return productService.getProductByNameAndPrice(productName, price);
+        else if(!name.isEmpty() && price != 0){
+            return productService.findByNameAndPrice(name, price);
         }
         return productService.getProducts();
     }
