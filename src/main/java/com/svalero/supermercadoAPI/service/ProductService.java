@@ -2,7 +2,6 @@ package com.svalero.supermercadoAPI.service;
 
 import com.svalero.supermercadoAPI.domain.Product;
 import com.svalero.supermercadoAPI.exception.ProductNotFoundException;
-import com.svalero.supermercadoAPI.exception.UserNotFoundException;
 import com.svalero.supermercadoAPI.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class ProductService {
     public List<Product> getProducts(){
         return productRepository.findAll();
     }
-    public Product getProductById(Long id) throws  ProductNotFoundException {
+    public Product getProductById(Long id) throws ProductNotFoundException {
         return productRepository.findById(id).orElseThrow(()-> new ProductNotFoundException());
     }
     public List<Product> findByName(String name){
