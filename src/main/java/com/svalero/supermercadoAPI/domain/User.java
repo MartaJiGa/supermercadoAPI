@@ -1,11 +1,13 @@
 package com.svalero.supermercadoAPI.domain;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -28,4 +30,8 @@ public class User {
 
     @Column
     private String email;
+
+    @OneToMany
+    @JoinColumn(name = "purchase_id")
+    private List<Purchase> purchase;
 }

@@ -4,10 +4,10 @@ import com.svalero.supermercadoAPI.domain.ErrorResponse;
 import com.svalero.supermercadoAPI.domain.User;
 import com.svalero.supermercadoAPI.exception.UserNotFoundException;
 import com.svalero.supermercadoAPI.service.UserService;
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
@@ -22,8 +22,8 @@ public class UserController {
 
     //region GET requests
     @GetMapping("/user/{userId}")
-    public Optional<User> getUser(@PathVariable long userId) throws UserNotFoundException {
-        return userService.getUserById(userId);
+    public User getUser(@PathVariable long userId) throws UserNotFoundException {
+        return userService.getUserById(userId).orElseThrow(()-> new UserNotFoundException());
     }
     @GetMapping("/users")
     public List<User> findAll(@RequestParam(defaultValue = "")String userName, @RequestParam(defaultValue = "")String surname) throws UserNotFoundException {
@@ -62,8 +62,8 @@ public class UserController {
     //endregion
 
     //region EXCEPTION HANDLER
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ErrorResponse> badRequestException(BadRequestException badRequestEx){
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> badRequestException(MethodArgumentNotValidException badRequestEx){
         ErrorResponse errorResponse = new ErrorResponse(400, badRequestEx.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }

@@ -1,12 +1,11 @@
 package com.svalero.supermercadoAPI.domain;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -29,9 +28,9 @@ public class Purchase {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Optional<User> user;
+    private User user;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "product_id")
-    private Optional<Product> product;
+    private Product product;
 }

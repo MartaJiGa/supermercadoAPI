@@ -40,17 +40,13 @@ public class UserService {
     //endregion
 
     //region PUT requests
-    public void modifyUser(User newUser, long userId){
-        Optional<User> user = userRepository.findById(userId);
+    public void modifyUser(User newUser, long userId) throws UserNotFoundException {
+        User user = userRepository.findById(userId).orElseThrow(()-> new UserNotFoundException());
 
-        if(user.isPresent()){
-            User existingUser = user.get();
-
-            existingUser.setName(newUser.getName());
-            existingUser.setSurname(newUser.getSurname());
-            existingUser.setDateOfBirth(newUser.getDateOfBirth());
-            existingUser.setEmail(newUser.getEmail());
-        }
+        user.setName(newUser.getName());
+        user.setSurname(newUser.getSurname());
+        user.setDateOfBirth(newUser.getDateOfBirth());
+        user.setEmail(newUser.getEmail());
     }
     //endregion
 
