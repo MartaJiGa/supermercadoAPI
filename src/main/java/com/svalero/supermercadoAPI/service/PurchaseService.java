@@ -1,9 +1,12 @@
 package com.svalero.supermercadoAPI.service;
 
 import com.svalero.supermercadoAPI.domain.Purchase;
+import com.svalero.supermercadoAPI.domain.User;
+import com.svalero.supermercadoAPI.exception.UserNotFoundException;
 import com.svalero.supermercadoAPI.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +16,9 @@ public class PurchaseService {
 
     @Autowired
     private PurchaseRepository purchaseRepository;
+
+    @Autowired
+    private UserService userService;
 
     //region GET requests
     public List<Purchase> getPurchases(){
@@ -24,19 +30,20 @@ public class PurchaseService {
     public List<Purchase> getPurchasesByUser(long id){
         return purchaseRepository.findByUser(id);
     }
-    public Optional<Purchase> getPurchaseByUser(long userId, long purchaseId){
-        return purchaseRepository.findByUserAndPurchase(userId, purchaseId);
-    }
     //endregion
 
     //region POST requests
-    public void savePurchase(Purchase purchase){
+    public void savePurchase(Purchase purchase, long userId) throws UserNotFoundException {
+        Purchase newPurchase = new Purchase();
+        Optional<User> user = userService.getUserById(userId);
+
+        newPurchase.setUser(user);
         purchaseRepository.save(purchase);
     }
     //endregion
 
     //region PUT requests
-    public void modifyPurchase(Purchase newPurchase, long purchaseId){
+    public void modifyPurchase(Purchase newPurchase, long purchaseId, long userId){
         Optional<Purchase> purchase = purchaseRepository.findById(purchaseId);
 
         if(purchase.isPresent()){

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -28,5 +29,9 @@ public class Purchase {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Optional<User> user;
+
+    @ManyToMany
+    @JoinColumn(name = "product_id")
+    private Optional<Product> product;
 }

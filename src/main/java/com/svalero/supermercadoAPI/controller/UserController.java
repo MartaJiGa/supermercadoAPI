@@ -1,6 +1,7 @@
 package com.svalero.supermercadoAPI.controller;
 
 import com.svalero.supermercadoAPI.domain.User;
+import com.svalero.supermercadoAPI.exception.UserNotFoundException;
 import com.svalero.supermercadoAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class UserController {
 
     //region GET requests
     @GetMapping("/user/{userId}")
-    public Optional<User> getUser(@PathVariable long userId){
+    public Optional<User> getUser(@PathVariable long userId) throws UserNotFoundException {
         return userService.getUserById(userId);
     }
     @GetMapping("/users")
@@ -43,14 +44,14 @@ public class UserController {
 
     //region PUT requests
     @PutMapping("/user/{userId}")
-    public void modifyUser(@RequestBody User user, @PathVariable long userId){
+    public void modifyUser(@RequestBody User user, @PathVariable long userId) throws UserNotFoundException {
         userService.modifyUser(user, userId);
     }
     //endregion
 
     //region DELETE requests
     @DeleteMapping("/user/{userId}")
-    public void removeUser(@PathVariable long userId){
+    public void removeUser(@PathVariable long userId) throws UserNotFoundException {
         userService.removeUser(userId);
     }
     //endregion

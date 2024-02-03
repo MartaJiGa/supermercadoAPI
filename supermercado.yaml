@@ -417,7 +417,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/InternalServerError'
-  /user/{userId}/purchase/{purchaseId}:
+  /purchase/{purchaseId}:
     parameters:
       - $ref: '#/components/parameters/userId'
       - $ref: '#/components/parameters/purchaseId'

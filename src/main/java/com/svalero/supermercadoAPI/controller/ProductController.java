@@ -1,6 +1,7 @@
 package com.svalero.supermercadoAPI.controller;
 
 import com.svalero.supermercadoAPI.domain.Product;
+import com.svalero.supermercadoAPI.exception.ProductNotFoundException;
 import com.svalero.supermercadoAPI.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class ProductController {
 
     //region GET requests
     @GetMapping("/product/{productId}")
-    public Optional<Product> getProduct(@PathVariable long productId){
+    public Optional<Product> getProduct(@PathVariable long productId) throws ProductNotFoundException {
         return productService.getProductById(productId);
     }
     @GetMapping("/products")
@@ -43,14 +44,14 @@ public class ProductController {
 
     //region PUT requests
     @PutMapping("/product/{productId}")
-    public void modifyProduct(@RequestBody Product product, @PathVariable long productId){
+    public void modifyProduct(@RequestBody Product product, @PathVariable long productId) throws ProductNotFoundException{
         productService.modifyProduct(product, productId);
     }
     //endregion
 
     //region DELETE requests
     @DeleteMapping("/product/{productId}")
-    public void removeProduct(@PathVariable long productId){
+    public void removeProduct(@PathVariable long productId) throws ProductNotFoundException {
         productService.removeProduct(productId);
     }
     //endregion
