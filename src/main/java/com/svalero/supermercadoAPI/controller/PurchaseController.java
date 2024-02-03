@@ -5,10 +5,10 @@ import com.svalero.supermercadoAPI.domain.Purchase;
 import com.svalero.supermercadoAPI.exception.ProductNotFoundException;
 import com.svalero.supermercadoAPI.exception.UserNotFoundException;
 import com.svalero.supermercadoAPI.service.PurchaseService;
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
@@ -54,8 +54,8 @@ public class PurchaseController {
     //endregion
 
     //region EXCEPTION HANDLER
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ErrorResponse> badRequestException(BadRequestException badRequestEx){
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> badRequestException(MethodArgumentNotValidException badRequestEx){
         ErrorResponse errorResponse = new ErrorResponse(400, badRequestEx.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
