@@ -1,11 +1,16 @@
 package com.svalero.supermercadoAPI.controller;
 
+import com.svalero.supermercadoAPI.domain.ErrorResponse;
 import com.svalero.supermercadoAPI.domain.Purchase;
 import com.svalero.supermercadoAPI.exception.ProductNotFoundException;
 import com.svalero.supermercadoAPI.exception.UserNotFoundException;
 import com.svalero.supermercadoAPI.service.PurchaseService;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,5 +54,25 @@ public class PurchaseController {
     //endregion
 
     //region EXCEPTION HANDLER
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorResponse> badRequestException(BadRequestException badRequestEx){
+        ErrorResponse errorResponse = new ErrorResponse(400, badRequestEx.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ErrorResponse> productNotFoundException(ProductNotFoundException resNotFoundEx){
+        ErrorResponse errorResponse = new ErrorResponse(404, resNotFoundEx.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> userNotFoundException(UserNotFoundException userNotFoundEx){
+        ErrorResponse errorResponse = new ErrorResponse(404, userNotFoundEx.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(HttpServerErrorException.InternalServerError.class)
+    public ResponseEntity<ErrorResponse> internalServerError(HttpServerErrorException.InternalServerError intServError){
+        ErrorResponse errorResponse = new ErrorResponse(500, intServError.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     //endregion
 }
