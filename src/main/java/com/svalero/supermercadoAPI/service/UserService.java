@@ -22,13 +22,13 @@ public class UserService {
     public Optional<User> getUserById(Long id) throws UserNotFoundException {
         return userRepository.findById(id);
     }
-    public List<User> getUserByName(String name) throws UserNotFoundException {
+    public List<User> findByName(String name) throws UserNotFoundException {
         return userRepository.findByName(name);
     }
-    public List<User> getUserBySurname(String surname) throws UserNotFoundException {
+    public List<User> findBySurname(String surname) throws UserNotFoundException {
         return userRepository.findBySurname(surname);
     }
-    public List<User> getUserByNameAndSurname(String name, String surname){
+    public List<User> findByNameAndSurname(String name, String surname){
         return userRepository.findByNameAndSurname(name,surname);
     }
     //endregion
