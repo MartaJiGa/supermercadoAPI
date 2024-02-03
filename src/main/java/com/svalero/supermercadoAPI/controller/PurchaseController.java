@@ -34,8 +34,8 @@ public class PurchaseController {
 
     //region POST requests
     @PostMapping("/user/{userId}/purchases")
-    public void savePurchase(@RequestBody Purchase purchase, @PathVariable long userId) throws UserNotFoundException {
-        purchaseService.savePurchase(purchase, userId);
+    public void addPurchase(@RequestBody Purchase purchase, @PathVariable long userId) throws UserNotFoundException {
+        purchaseService.addPurchase(purchase, userId);
     }
     //endregion
 

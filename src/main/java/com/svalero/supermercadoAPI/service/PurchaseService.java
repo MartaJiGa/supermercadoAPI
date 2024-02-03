@@ -2,12 +2,14 @@ package com.svalero.supermercadoAPI.service;
 
 import com.svalero.supermercadoAPI.domain.Purchase;
 import com.svalero.supermercadoAPI.domain.User;
+import com.svalero.supermercadoAPI.exception.ProductNotFoundException;
 import com.svalero.supermercadoAPI.exception.UserNotFoundException;
 import com.svalero.supermercadoAPI.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,11 +35,9 @@ public class PurchaseService {
     //endregion
 
     //region POST requests
-    public void savePurchase(Purchase purchase, long userId) throws UserNotFoundException {
-        Purchase newPurchase = new Purchase();
-        Optional<User> user = userService.getUserById(userId);
-
-        newPurchase.setUser(user);
+    public void addPurchase(Purchase purchase, long userId) throws UserNotFoundException {
+        User user = userService.getUserById(userId).orElseThrow(()-> new UserNotFoundException());
+        purchase.setUser(user);
         purchaseRepository.save(purchase);
     }
     //endregion

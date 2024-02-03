@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface PurchaseRepository extends CrudRepository<Purchase, Long> {
     List<Purchase> findAll();
     List<Purchase> findByUser(long userId);
-    Optional<Purchase> findByUserAndPurchase(long userId, long purchaseId);
+    Optional<Purchase> findByUserAndId(long userId, long id);
 }

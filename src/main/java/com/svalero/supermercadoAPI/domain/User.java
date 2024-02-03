@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Data
@@ -32,5 +33,5 @@ public class User {
 
     @OneToMany
     @JoinColumn(name = "purchase_id")
-    private Optional<Purchase> purchase;
+    private List<Purchase> purchase;
 }
